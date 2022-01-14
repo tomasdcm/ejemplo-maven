@@ -22,7 +22,7 @@ public class RestData {
 	//Inicio Class
 	private final static Logger LOGGER = Logger.getLogger("devops.subnivel.Control");
 
-	
+	//Obtener Paises
 	@GetMapping(path = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Pais getData(@RequestParam(name = "msg") String message){
 		
@@ -33,21 +33,23 @@ public class RestData {
 		return response;
 	}
 	
-	
+	//Obtener total de Paises
 	@GetMapping(path = "/estadoPais", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Pais getTotalPais(@RequestParam(name = "pais") String message){
 		RestTemplate restTemplate = new RestTemplate();
 	    ResponseEntity<String> call= restTemplate.getForEntity("https://api.covid19api.com/live/country/" + message ,String.class);
 	    
 	    LOGGER.log(Level.INFO, "Consulta por pais");
-	    
+	    	//Instancia model Pais
 		Pais response = new Pais();
 		int confirmed = 0;
 		int death = 0;
 		int recovered = 0;
 		Gson gson = new Gson();
-        Pais[] estados = gson.fromJson(call.getBody().toLowerCase(), Pais[].class);
-
+        //convertir datos a Json
+	Pais[] estados = gson.fromJson(call.getBody().toLowerCase(), Pais[].class);
+	
+	
         for(Pais estado : estados) {
         	response.setDate(estado.getDate());
         	response.setActive(estado.getActive());
@@ -65,7 +67,7 @@ public class RestData {
 		return response;		
 	}
 	
-
+	//Total mundial
 	@GetMapping(path = "/estadoMundial", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Mundial getTotalMundial(){
 		
