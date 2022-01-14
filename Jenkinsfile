@@ -37,7 +37,7 @@ pipeline {
                 script{
                     dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
                         env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
-                        bat './mvnw.cmd spring-boot:run '
+                        bat './mvnw.cmd spring-boot:run &'
                         sleep 20
                     }
                 }
