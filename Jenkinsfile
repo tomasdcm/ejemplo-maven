@@ -46,7 +46,8 @@ pipeline {
         stage('TestApp') {
             steps {
                 script{
-                    bat 'start "chrome" "http://localhost:8081/rest/mscovid/test?msg=testing"'
+                  /*  bat 'start "chrome" "http://localhost:8081/rest/mscovid/test?msg=testing"'  */
+                    sleep 5
                 }
             }
         }
