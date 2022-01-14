@@ -16,10 +16,12 @@ pipeline {
         {
             steps{
                 script{
-                    def scannerHome = tool 'sonar-scanner';
-                    withSonarQubeEnv('sonarqube-server') {
-                        //bat '${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-maven -Dsonar.sources=src -Dsonar.java.binaries=build'
-                        sleep 5
+                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
+                        env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
+                        def scannerHome = tool 'sonar-scanner';
+                        withSonarQubeEnv('sonarqube-server') {
+                            bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-maven -Dsonar.sources=src -Dsonar.java.binaries=build"
+                        }
                     }
                 }
             }
