@@ -86,17 +86,4 @@ public class RestData {
 	}
 }
 
-
-/*
-
-Con 
-estas 
-líneas 
-el 
-código 
-no 
-pasará 
-el 
-Quality Gate
-
-*/
+/* Ahora si pasará el Quality Gate */
