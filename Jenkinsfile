@@ -5,7 +5,7 @@ pipeline {
         stage('Compile') {
             steps {
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
+                    dir('C:/Programming/devops-usach/tarea-14-ene/ejemplo-maven'){
                         env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
                         bat './mvnw.cmd clean compile -e'
                     }
@@ -16,7 +16,7 @@ pipeline {
         {
             steps{
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
+                    dir('C:/Programming/devops-usach/tarea-14-ene/ejemplo-maven'){
                         env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
                         def scannerHome = tool 'sonar-scanner';
                         withSonarQubeEnv('sonarqube-server') {
@@ -29,7 +29,7 @@ pipeline {
         stage('Test') {
             steps {
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
+                    dir('C:/Programming/devops-usach/tarea-14-ene/ejemplo-maven'){
                         env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
                         bat './mvnw.cmd clean test -e'
                     }
@@ -39,7 +39,7 @@ pipeline {
         stage('Jar') {
             steps {
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
+                    dir('C:/Programming/devops-usach/tarea-14-ene/ejemplo-maven'){
                         env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
                         bat './mvnw.cmd clean package -e'
                     }
@@ -49,7 +49,7 @@ pipeline {
         stage('Run') {
             steps {
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
+                    dir('C:/Programming/devops-usach/tarea-14-ene/ejemplo-maven'){
                         env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
                         bat './mvnw.cmd spring-boot:run &'
                         sleep 20
