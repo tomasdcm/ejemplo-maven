@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 @RestController
 @RequestMapping(path = "/rest/mscovid")
 public class RestData {
-	
+	//Inicio Class
 	private final static Logger LOGGER = Logger.getLogger("devops.subnivel.Control");
 
 	
