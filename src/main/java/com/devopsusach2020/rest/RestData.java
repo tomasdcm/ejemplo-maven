@@ -85,3 +85,18 @@ public class RestData {
 		return response;		
 	}
 }
+
+
+/*
+
+Con 
+estas 
+líneas 
+el 
+código 
+no 
+pasará 
+el 
+Quality Gate
+
+*/
