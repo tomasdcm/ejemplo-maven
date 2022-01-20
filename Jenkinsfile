@@ -54,7 +54,7 @@ pipeline {
         stage('Upload Nexus') {
             steps {
                 script{
-                    bat "curl -v --user admin:123456 --upload-file DevOpsUsach2020-0.0.1.jar https://44fe-186-79-184-102.ngrok.io/repository/test-repo/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar " 
+                    bat "curl -v --user admin:123456 --upload-file DevOpsUsach2020-0.0.1.jar https://44fe-186-79-184-102.ngrok.io/repository/test-repo/com/devopsusach2020/DevOpsUsach2020/0.0.2/DevOpsUsach2020-0.0.2.jar " 
                 }                                    
             }
         }
