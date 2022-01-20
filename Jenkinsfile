@@ -10,7 +10,7 @@ pipeline {
             }
         }
         
-        stage('SonarQube analysis') {
+        /*stage('SonarQube analysis') {
             steps {
                 script{
                     def scannerHome = tool 'sonar-scanner';
@@ -19,7 +19,7 @@ pipeline {
                     }
                 }                                                 
             }
-        }
+        }*/
         
          stage('Test Code') {
             steps {
