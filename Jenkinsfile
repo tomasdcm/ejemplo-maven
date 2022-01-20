@@ -2,53 +2,62 @@ pipeline {
     agent any
 
     stages {
-        stage('Compile') {
+        stage('Compile Code') {
             steps {
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
-                        env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
-                        bat './mvnw.cmd clean compile -e'
+                    bat "mvn clean compile -e"  
+                }                                           
+            }
+        }
+        
+        stage('SonarQube analysis') {
+            steps {
+                script{
+                    def scannerHome = tool 'sonar-scanner';
+                    withSonarQubeEnv('sonar-server') { 
+                    bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-maven -Dsonar.sources=src -Dsonar.java.binaries=build " 
                     }
-                }
+                }                                                 
             }
         }
-        stage('Test') {
+        
+         stage('Test Code') {
             steps {
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
-                        env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
-                        bat './mvnw.cmd clean test -e'
-                    }
-                }
+                    bat "mvn clean test -e"    
+                }                                                 
             }
         }
-        stage('Jar') {
+         stage('Jar Code') {
             steps {
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
-                        env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
-                        bat './mvnw.cmd clean package -e'
-                    }
-                }
+                    bat "mvn clean package -e" 
+                }                                   
             }
         }
-        stage('Run') {
+         stage('Run Jar') {
             steps {
                 script{
-                    dir('C:/Programming/devops-usach/tomas-del-campo/ejemplo-maven'){
-                        env.JAVA_HOME = "C:/Program Files/Java/jdk-11.0.13"
-                        bat './mvnw.cmd spring-boot:run &'
-                        sleep 20
-                    }
-                }
+                    bat "start /min mvn spring-boot:run &" 
+                }                                    
             }
         }
-        stage('TestApp') {
+        
+        /*stage('Test Application') {
             steps {
                 script{
-                    bat 'start chrome http://localhost:8081/rest/mscovid/test?msg=testing'
-                }
+                    bat "start chrome http://localhost:8081/rest/mscovid/test?msg=testing" 
+                }                                    
+            }
+        }*/
+        
+        stage('Upload Nexus') {
+            steps {
+                script{
+                    bat "curl -v --user admin:123456 --upload-file DevOpsUsach2020-0.0.1.jar https://44fe-186-79-184-102.ngrok.io/repository/test-repo/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar " 
+                }                                    
             }
         }
+        
     }
 }
